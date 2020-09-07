@@ -1,12 +1,10 @@
 import axios from 'axios';
-
-const API_HOST = process.env.API_HOST;
-const API_KEY = process.env.API_KEY;
+import { API_HOST, API_KEY } from '../redux/modules/constant';
 
 export const api = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
+  baseURL: API_HOST,
   params: {
-    api_key: '9a520f9c7db1b6f3818d5ae46bd7c57e',
+    api_key: API_KEY,
     language: 'ko-KR',
   },
 });
@@ -18,4 +16,26 @@ export const trendingApi = {
   movieWeek: () => api.get('/trending/movie/week'),
   tvDay: () => api.get('/trending/tv/day'),
   tvWeek: () => api.get('/trending/tv/week'),
+};
+
+export const moviesApi = {
+  nowPlaying: () => api.get('/movie/now_playing'),
+  topRated: () => api.get('/movie/top_rated'),
+  detail: (id: number) =>
+    api.get(`/movie/${id}`, {
+      params: {
+        append_to_response: 'videos',
+      },
+    }),
+};
+
+export const tvApi = {
+  airingToday: () => api.get('/tv/airing_today'),
+  topRated: () => api.get('/tv/top_rated'),
+  detail: (id: number) =>
+    api.get(`/tv/${id}`, {
+      params: {
+        append_to_response: 'videos',
+      },
+    }),
 };
