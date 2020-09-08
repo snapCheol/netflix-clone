@@ -1,10 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 import { CloseOutlined } from '@ant-design/icons';
-import { MediaDetail, bgImagePropsType } from '../redux/modules/types';
+import {
+  MediaDetail,
+  bgImagePropsType,
+  ModalAnimationType,
+} from '../redux/modules/types';
 import { IMAGE_PATH_PREFIX } from '../redux/modules/constant';
+import { fadeIn, scaleUp, scaleDown, fadeOut } from '../styles/Animation';
 
-const Dimm = styled.div`
+const Dimm = styled.div<ModalAnimationType>`
   display: flex;
   justify-content: center;
   position: fixed;
@@ -16,9 +21,19 @@ const Dimm = styled.div`
   z-index: 9999;
   overflow-y: auto;
   transition: all 1s ease;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in;
+  animation-name: ${fadeIn};
+
+  ${(props) =>
+    props.modalAnimation &&
+    css`
+      animation-name: ${fadeOut};
+    `}
 `;
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div<ModalAnimationType>`
   position: absolute;
   top: 80px;
   bottom: 80px;
@@ -29,6 +44,16 @@ const ModalContainer = styled.div`
   background-color: #181818;
   border-radius: 5px;
   overflow-y: auto;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in;
+  animation-name: ${scaleUp};
+  animation-fill-mode: forwards;
+  ${(props) =>
+    props.modalAnimation &&
+    css`
+      animation-name: ${scaleDown};
+    `}
 `;
 
 const DetailStillCut = styled.div<bgImagePropsType>`
@@ -85,10 +110,24 @@ const DetailModal = ({
   data,
   closeModal,
 }: DetailModalType) => {
-  if (!isDetailModalOpen) return null;
+  const [animate, setAnimate] = useState(false);
+  const [localVisible, setLocalVisible] = useState(isDetailModalOpen);
+
+  useEffect(() => {
+    if (localVisible && !isDetailModalOpen) {
+      setAnimate(true);
+      window.setTimeout(() => {
+        setAnimate(false);
+      }, 250);
+    }
+    setLocalVisible(isDetailModalOpen);
+    console.log('isDetailModalOpen', isDetailModalOpen);
+  }, [animate, localVisible, isDetailModalOpen]);
+
+  if (!localVisible && !animate) return null;
   return (
-    <Dimm onClick={closeModal}>
-      <ModalContainer>
+    <Dimm onClick={closeModal} modalAnimation={!isDetailModalOpen}>
+      <ModalContainer modalAnimation={!isDetailModalOpen}>
         <DetailStillCut
           bgImage={`${IMAGE_PATH_PREFIX}/original${
             data?.backdrop_path || data?.poster_path

@@ -2,6 +2,10 @@ export type bgImagePropsType = {
   bgImage: string;
 };
 
+export type ModalAnimationType = {
+  modalAnimation?: boolean;
+};
+
 export interface MediaListType {
   id: number;
   video: boolean;
