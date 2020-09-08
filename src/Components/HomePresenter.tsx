@@ -3,6 +3,7 @@ import { MediaListType } from '../redux/modules/types';
 import Section from './Section';
 import Carousel from './Carousel';
 import ListItem from './ListItem';
+import Loader from './Loader';
 
 type HomePresenterType = {
   trendAlldayLoading: boolean;
@@ -21,7 +22,7 @@ const HomePresenter = ({
   trendAllWeekData,
   trendAllWeekError,
 }: HomePresenterType) => {
-  if (trendAlldayLoading || trendAllWeekLoading) return <p>로딩중...</p>;
+  if (trendAlldayLoading || trendAllWeekLoading) return <Loader />;
   if (trendAlldayError || trendAllWeekError) return <p>에러 발생!!</p>;
   return (
     <>

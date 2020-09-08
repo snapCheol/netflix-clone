@@ -3,6 +3,7 @@ import Section from './Section';
 import ListItem from './ListItem';
 import { MediaListType } from '../redux/modules/types';
 import Carousel from './Carousel';
+import Loader from './Loader';
 
 type MoviePresenterTypes = {
   trendMovieWeekLoading: boolean;
@@ -21,6 +22,8 @@ const MoviePresenter = ({
   topRatedMovieData,
   topRatedMovieError,
 }: MoviePresenterTypes) => {
+  if (trendMovieWeekLoading && topRatedMovieLoading) return <Loader />;
+  if (trendMovieWeekError || topRatedMovieError) return <p>에러 발생!...</p>;
   return (
     <>
       <Section title="지금 뜨는 영화">

@@ -3,6 +3,7 @@ import Section from './Section';
 import ListItem from './ListItem';
 import { MediaListType } from '../redux/modules/types';
 import Carousel from './Carousel';
+import Loader from './Loader';
 
 type TvPresenterTypes = {
   trendTvWeekLoading: boolean;
@@ -21,6 +22,8 @@ const TvPresenter = ({
   topRatedTvData,
   topRatedTvError,
 }: TvPresenterTypes) => {
+  if (trendTvWeekLoading && topRatedTvLoading) return <Loader />;
+  if (trendTvWeekError || topRatedTvError) return <p>에러 발생!...</p>;
   return (
     <>
       <Section title="지금 뜨는 TV프로그램">
