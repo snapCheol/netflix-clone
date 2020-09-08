@@ -25,17 +25,26 @@ const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 850px;
+  max-width: 100%;
   background-color: #181818;
   border-radius: 5px;
   overflow-y: auto;
 `;
 
 const DetailStillCut = styled.div<bgImagePropsType>`
+  position: relative;
   padding: 20% 0;
-  background-color: orange;
   background-image: url(${(props) => props.bgImage});
   background-size: cover;
   background-position: 50% 20%;
+`;
+const DetailStillCutBg = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to top, #181818, transparent 50%);
 `;
 
 const CloseButton = styled.button`
@@ -83,8 +92,10 @@ const DetailModal = ({
         <DetailStillCut
           bgImage={`${IMAGE_PATH_PREFIX}/original${
             data?.backdrop_path || data?.poster_path
-          }`}
-        />
+          }`}>
+          <DetailStillCutBg />
+        </DetailStillCut>
+
         <DetailContent>
           <h3>{data?.title || data?.name}</h3>
           <p>{data?.overview}</p>
