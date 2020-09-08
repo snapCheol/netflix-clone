@@ -17,7 +17,7 @@ import {
 } from '../redux/modules/media';
 
 type ListItemTypes = {
-  mediaType: string;
+  mediaType: 'tv' | 'movie';
   id: number;
   data: MediaListType | null;
 };
@@ -54,8 +54,8 @@ const ListItem = ({ data, id, mediaType }: ListItemTypes) => {
       href="#"
       role="button"
       onClick={onDetailDialog}
-      onMouseEnter={toggleHover}
-      onMouseLeave={toggleHover}
+      onMouseOver={toggleHover}
+      onMouseOut={toggleHover}
       onFocus={toggleHover}
       onBlur={toggleHover}>
       <CardContainer>

@@ -39,3 +39,12 @@ export const tvApi = {
       },
     }),
 };
+
+export const searchApi = {
+  multiSearch: (keyword: string) =>
+    api.get('/search/multi', {
+      params: {
+        query: keyword,
+      },
+    }),
+};

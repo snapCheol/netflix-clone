@@ -1,6 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
+import { fetchSearch } from '../redux/modules/search';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 type FormProps = {
   activeSearch: boolean;
@@ -33,13 +36,35 @@ type SearchInput = {
 };
 
 const SearchInput = ({ activeSearch, setActiveSearch }: SearchInput) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [value, setValue] = useState('');
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  }, []);
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      history.push('/search');
+      dispatch(fetchSearch(value));
+    },
+    [history, dispatch, value]
+  );
+
   const closeSearchInput = useCallback(() => {
     setActiveSearch(false);
   }, [setActiveSearch]);
   return (
-    <Form activeSearch={activeSearch}>
+    <Form onSubmit={onSubmit} activeSearch={activeSearch}>
       <SearchOutlined />
-      <Search type="text" onBlur={closeSearchInput} autoFocus />
+      <Search
+        type="text"
+        value={value}
+        onBlur={closeSearchInput}
+        onChange={onChange}
+        autoFocus
+      />
       <CloseButton>
         <CloseOutlined />
       </CloseButton>

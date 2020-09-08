@@ -1,4 +1,4 @@
-import { all, takeEvery, call, put } from 'redux-saga/effects';
+import { all, takeEvery, call, put, delay } from 'redux-saga/effects';
 import {
   FETCH_TREND_ALL_DAY_REQUEST,
   FETCH_TREND_ALL_DAY_SUCCESS,
@@ -30,6 +30,7 @@ import { trendingApi, moviesApi, tvApi } from '../../../api/api';
 function* fetchAllDaySaga() {
   try {
     const response = yield call(trendingApi.allDay);
+    yield delay(1000);
     yield put({
       type: FETCH_TREND_ALL_DAY_SUCCESS,
       payload: response.data.results,
@@ -45,6 +46,7 @@ function* fetchAllDaySaga() {
 function* fetchAllWeekSaga() {
   try {
     const response = yield call(trendingApi.allWeek);
+    yield delay(1000);
     yield put({
       type: FETCH_TREND_ALL_WEEK_SUCCESS,
       payload: response.data.results,
@@ -60,6 +62,7 @@ function* fetchAllWeekSaga() {
 function* fetchMovieWeekSaga() {
   try {
     const response = yield call(trendingApi.movieWeek);
+    yield delay(1000);
     yield put({
       type: FETCH_TREND_MOVIE_WEEK_SUCCESS,
       payload: response.data.results,
@@ -75,6 +78,7 @@ function* fetchMovieWeekSaga() {
 function* fetchTvWeekSaga() {
   try {
     const response = yield call(trendingApi.tvWeek);
+    yield delay(1000);
     yield put({
       type: FETCH_TREND_TV_WEEK_SUCCESS,
       payload: response.data.results,
@@ -90,6 +94,7 @@ function* fetchTvWeekSaga() {
 function* fetchTopRatedMovieSaga() {
   try {
     const response = yield call(moviesApi.topRated);
+    yield delay(1000);
     yield put({
       type: FETCH_TOP_RATED_MOVIE_SUCCESS,
       payload: response.data.results,
@@ -105,6 +110,7 @@ function* fetchTopRatedMovieSaga() {
 function* fetchTopRatedTvSaga() {
   try {
     const response = yield call(tvApi.topRated);
+    yield delay(1000);
     yield put({
       type: FETCH_TOP_RATED_TV_SUCCESS,
       payload: response.data.results,
