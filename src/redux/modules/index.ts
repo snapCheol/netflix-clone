@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux';
-import trending from './trending';
+import media from './media';
 import { all } from 'redux-saga/effects';
-import trendingSaga from './trending/sagas';
+import mediaSaga from './media/sagas';
 
 const rootReducer = combineReducers({
-  trending,
+  media,
 });
 
 export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>;
 
 export function* rootSaga() {
-  yield all([trendingSaga()]);
+  yield all([mediaSaga()]);
 }

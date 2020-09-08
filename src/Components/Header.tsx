@@ -11,6 +11,8 @@ const Container = styled.header`
   left: 0;
   width: 100%;
   height: 70px;
+  background: #000;
+  z-index: 999;
   & > div {
     position: relative;
     height: 100%;

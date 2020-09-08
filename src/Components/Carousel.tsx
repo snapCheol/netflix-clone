@@ -8,13 +8,13 @@ const SliderWrapper = styled.div`
   padding: 0 4%;
 `;
 
-const CarouselList: React.FC = ({ children }) => {
+const Carousel: React.FC = ({ children }) => {
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 5,
+    slidesToScroll: 5,
   };
 
   return (
@@ -26,4 +26,4 @@ const CarouselList: React.FC = ({ children }) => {
   );
 };
 
-export default CarouselList;
+export default Carousel;
