@@ -124,7 +124,7 @@ const DetailModal = ({
     console.log('isDetailModalOpen', isDetailModalOpen);
   }, [animate, localVisible, isDetailModalOpen]);
 
-  if (!localVisible && !animate) return null;
+  if (!data || (!localVisible && !animate)) return null;
   return (
     <Dimm onClick={closeModal} modalAnimation={!isDetailModalOpen}>
       <ModalContainer modalAnimation={!isDetailModalOpen}>
