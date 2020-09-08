@@ -14,6 +14,8 @@ const Main: React.FC = ({ children }) => {
     const body = document.querySelector('body');
     if (body && isDetailModalOpen) {
       body.style.overflow = 'hidden';
+    } else if (body) {
+      body.style.overflow = 'auto';
     }
   }, [isDetailModalOpen]);
 
