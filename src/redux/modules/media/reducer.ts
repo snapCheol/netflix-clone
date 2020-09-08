@@ -18,30 +18,44 @@ import {
   FETCH_TREND_TV_WEEK_REQUEST,
   FETCH_TREND_TV_WEEK_SUCCESS,
   FETCH_TREND_TV_WEEK_FAILURE,
-  FETCH_DETAIL_REQUEST,
-  FETCH_DETAIL_FAILURE,
-  FETCH_DETAIL_SUCCESS,
+  FETCH_DETAIL_MOVIE_REQUEST,
+  FETCH_DETAIL_MOVIE_SUCCESS,
+  FETCH_DETAIL_MOVIE_FAILURE,
+  FETCH_DETAIL_TV_REQUEST,
+  FETCH_DETAIL_TV_SUCCESS,
+  FETCH_DETAIL_TV_FAILURE,
+  OPEN_DETAIL_MODAL,
+  CLOSE_DETAIL_MODAL,
 } from './actions';
-import { MediaListType } from '../types';
+import { MediaListType, MediaDetail } from '../types';
 
-export interface AsyncState {
+export interface AsyncListState {
   loading: boolean;
   data: MediaListType[] | null;
   error: Error | null;
 }
 
+export interface AsyncDetailState {
+  loading: boolean;
+  data: MediaDetail | null;
+  error: Error | null;
+}
+
 export interface MediaState {
-  allDay: AsyncState;
-  allWeek: AsyncState;
-  movieDay: AsyncState;
-  movieWeek: AsyncState;
-  tvDay: AsyncState;
-  tvWeek: AsyncState;
-  topRatedMovie: AsyncState;
-  topRatedTv: AsyncState;
+  isDetailModalOpen: boolean;
+  allDay: AsyncListState;
+  allWeek: AsyncListState;
+  movieDay: AsyncListState;
+  movieWeek: AsyncListState;
+  tvDay: AsyncListState;
+  tvWeek: AsyncListState;
+  topRatedMovie: AsyncListState;
+  topRatedTv: AsyncListState;
+  detailMedia: AsyncDetailState;
 }
 
 const initialState: MediaState = {
+  isDetailModalOpen: false,
   allDay: {
     loading: false,
     data: null,
@@ -78,6 +92,11 @@ const initialState: MediaState = {
     error: null,
   },
   topRatedTv: {
+    loading: false,
+    data: null,
+    error: null,
+  },
+  detailMedia: {
     loading: false,
     data: null,
     error: null,
@@ -177,9 +196,42 @@ const reducer = (state = initialState, action: any) => {
         draft.topRatedTv.data = null;
         draft.topRatedTv.error = action.payload;
         break;
-      case FETCH_DETAIL_REQUEST:
-      case FETCH_DETAIL_SUCCESS:
-      case FETCH_DETAIL_FAILURE:
+      case FETCH_DETAIL_MOVIE_REQUEST:
+        draft.detailMedia.loading = true;
+        draft.detailMedia.data = null;
+        draft.detailMedia.error = null;
+        break;
+      case FETCH_DETAIL_MOVIE_SUCCESS:
+        draft.detailMedia.loading = false;
+        draft.detailMedia.data = action.payload;
+        draft.detailMedia.error = null;
+        break;
+      case FETCH_DETAIL_MOVIE_FAILURE:
+        draft.detailMedia.loading = false;
+        draft.detailMedia.data = null;
+        draft.detailMedia.error = action.payload;
+        break;
+      case FETCH_DETAIL_TV_REQUEST:
+        draft.detailMedia.loading = true;
+        draft.detailMedia.data = null;
+        draft.detailMedia.error = null;
+        break;
+      case FETCH_DETAIL_TV_SUCCESS:
+        draft.detailMedia.loading = false;
+        draft.detailMedia.data = action.payload;
+        draft.detailMedia.error = null;
+        break;
+      case FETCH_DETAIL_TV_FAILURE:
+        draft.detailMedia.loading = false;
+        draft.detailMedia.data = null;
+        draft.detailMedia.error = action.payload;
+        break;
+      case OPEN_DETAIL_MODAL:
+        draft.isDetailModalOpen = true;
+        break;
+      case CLOSE_DETAIL_MODAL:
+        draft.isDetailModalOpen = false;
+        break;
       default:
         break;
     }

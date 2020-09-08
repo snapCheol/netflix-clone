@@ -30,9 +30,16 @@ export const FETCH_TOP_RATED_TV_REQUEST = 'media/FETCH_TOP_RATED_TV_REQUEST' as 
 export const FETCH_TOP_RATED_TV_SUCCESS = 'media/FETCH_TOP_RATED_TV_SUCCESS' as const;
 export const FETCH_TOP_RATED_TV_FAILURE = 'media/FETCH_TOP_RATED_TV_FAILURE' as const;
 
-export const FETCH_DETAIL_REQUEST = 'media/FETCH_DETAIL_REQUEST';
-export const FETCH_DETAIL_SUCCESS = 'media/FETCH_DETAIL_SUCCESS';
-export const FETCH_DETAIL_FAILURE = 'media/FETCH_DETAIL_FAILURE';
+export const FETCH_DETAIL_MOVIE_REQUEST = 'media/FETCH_DETAIL_MOVIE_REQUEST';
+export const FETCH_DETAIL_MOVIE_SUCCESS = 'media/FETCH_DETAIL_MOVIE_SUCCESS';
+export const FETCH_DETAIL_MOVIE_FAILURE = 'media/FETCH_DETAIL_MOVIE_FAILURE';
+
+export const FETCH_DETAIL_TV_REQUEST = 'media/FETCH_DETAIL_TV_REQUEST';
+export const FETCH_DETAIL_TV_SUCCESS = 'media/FETCH_DETAIL_TV_SUCCESS';
+export const FETCH_DETAIL_TV_FAILURE = 'media/FETCH_DETAIL_TV_FAILURE';
+
+export const OPEN_DETAIL_MODAL = 'media/OPEN_DETAIL_MODAL';
+export const CLOSE_DETAIL_MODAL = 'media/CLOSE_DETAIL_MODAL';
 
 export const fetchTrendAllDay = () => ({
   type: FETCH_TREND_ALL_DAY_REQUEST,
@@ -58,6 +65,17 @@ export const fetchTopRatedMovie = () => ({
 export const fetchTopRatedTv = () => ({
   type: FETCH_TOP_RATED_TV_REQUEST,
 });
-export const fetchDetail = () => ({
-  type: FETCH_DETAIL_REQUEST,
+export const fetchDetailMovie = (id: number) => ({
+  type: FETCH_DETAIL_MOVIE_REQUEST,
+  id,
+});
+export const fetchDetailTv = (id: number) => ({
+  type: FETCH_DETAIL_TV_REQUEST,
+  id,
+});
+export const openDetailModal = () => ({
+  type: OPEN_DETAIL_MODAL,
+});
+export const closeDetailModal = () => ({
+  type: CLOSE_DETAIL_MODAL,
 });

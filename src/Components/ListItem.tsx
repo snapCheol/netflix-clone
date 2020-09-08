@@ -9,6 +9,12 @@ import {
 } from './ListItemStyle';
 import { MediaListType } from '../redux/modules/types';
 import { IMAGE_PATH_PREFIX } from '../redux/modules/constant';
+import { useDispatch } from 'react-redux';
+import {
+  fetchDetailMovie,
+  fetchDetailTv,
+  openDetailModal,
+} from '../redux/modules/media';
 
 type ListItemTypes = {
   mediaType: string;
@@ -16,17 +22,24 @@ type ListItemTypes = {
   data: MediaListType | null;
 };
 
-const ListItem = ({ data, id, mediaType, ...props }: ListItemTypes) => {
+const ListItem = ({ data, id, mediaType }: ListItemTypes) => {
+  const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
-
   const toggleHover = useCallback(() => {
     setHover(!hover);
   }, [hover]);
 
-  const handleDetailDialog = useCallback((id: number, mediaType: string) => {
-    console.log(id, mediaType);
-  }, []);
-
+  const handleDetailDialog = useCallback(
+    (id: number, mediaType: string) => {
+      dispatch(openDetailModal());
+      if (mediaType === 'movie') {
+        dispatch(fetchDetailMovie(id));
+      } else {
+        dispatch(fetchDetailTv(id));
+      }
+    },
+    [dispatch]
+  );
   const onDetailDialog = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       e.preventDefault();

@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-
-type bgImagePropsType = {
-  bgImage: string;
-};
+import { bgImagePropsType } from '../redux/modules/types';
 
 export const CardContainer = styled.div`
   position: relative;
