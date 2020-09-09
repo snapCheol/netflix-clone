@@ -10,11 +10,31 @@ export const api = axios.create({
 });
 
 export const trendingApi = {
-  allDay: () => api.get('/trending/all/day'),
+  allDay: () =>
+    api.get('/trending/all/day', {
+      params: {
+        page: Math.floor(Math.random() * 10) + 1,
+      },
+    }),
   allWeek: () => api.get('/trending/all/week'),
-  movieDay: () => api.get('/trending/movie/day'),
-  movieWeek: () => api.get('/trending/movie/week'),
-  tvDay: () => api.get('/trending/tv/day'),
+  movieDay: () =>
+    api.get('/trending/movie/day', {
+      params: {
+        page: Math.floor(Math.random() * 3) + 1,
+      },
+    }),
+  movieWeek: () =>
+    api.get('/trending/movie/week', {
+      params: {
+        page: Math.floor(Math.random() * 6) + 1,
+      },
+    }),
+  tvDay: () =>
+    api.get('/trending/tv/day', {
+      params: {
+        page: Math.floor(Math.random() * 3) + 1,
+      },
+    }),
   tvWeek: () => api.get('/trending/tv/week'),
 };
 

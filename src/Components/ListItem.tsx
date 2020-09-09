@@ -63,15 +63,14 @@ const ListItem = ({ data, id, mediaType }: ListItemTypes) => {
         <StillCut bgImage={`${IMAGE_PATH_PREFIX}/w500${data.poster_path}`}>
           <PreviewContainer hover={hover}>
             <strong>{data.title || data.name}</strong>
+            <div>
+              <Rate
+                defaultValue={Number(data.vote_average) / 2}
+                allowHalf
+                disabled
+              />
+            </div>
             <Overview>
-              <div>
-                <Rate
-                  defaultValue={Number(data.vote_average) / 2}
-                  allowHalf
-                  disabled
-                />
-              </div>
-
               {data.overview ? (
                 data.overview
               ) : (

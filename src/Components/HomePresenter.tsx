@@ -4,6 +4,7 @@ import Section from './Section';
 import Carousel from './Carousel';
 import ListItem from './ListItem';
 import Loader from './Loader';
+import BillBoard from './BillBoard';
 
 type HomePresenterType = {
   trendAlldayLoading: boolean;
@@ -22,10 +23,16 @@ const HomePresenter = ({
   trendAllWeekData,
   trendAllWeekError,
 }: HomePresenterType) => {
-  if (trendAlldayLoading || trendAllWeekLoading) return <Loader />;
+  if (trendAlldayLoading && trendAllWeekLoading) return <Loader />;
   if (trendAlldayError || trendAllWeekError) return <p>에러 발생!!</p>;
   return (
     <>
+      <BillBoard
+        loading={trendAllWeekLoading}
+        data={
+          trendAllWeekData && trendAllWeekData[Math.floor(Math.random() * 2)]
+        }
+      />
       <Section title="지금 인기 있는 컨텐츠">
         <Carousel>
           {trendAlldayData?.map((media) => (

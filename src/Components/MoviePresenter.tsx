@@ -4,6 +4,7 @@ import ListItem from './ListItem';
 import { MediaListType } from '../redux/modules/types';
 import Carousel from './Carousel';
 import Loader from './Loader';
+import BillBoard from './BillBoard';
 
 type MoviePresenterTypes = {
   trendMovieWeekLoading: boolean;
@@ -26,6 +27,13 @@ const MoviePresenter = ({
   if (trendMovieWeekError || topRatedMovieError) return <p>에러 발생!...</p>;
   return (
     <>
+      <BillBoard
+        loading={trendMovieWeekLoading}
+        data={
+          trendMovieWeekData &&
+          trendMovieWeekData[Math.floor(Math.random() * 2)]
+        }
+      />
       <Section title="지금 뜨는 영화">
         <Carousel>
           {trendMovieWeekData?.map((media) => (

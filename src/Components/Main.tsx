@@ -3,9 +3,14 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import DetailContainer from '../Containers/DetailModalContainer';
 import { RootState } from '../redux/modules';
+import { device } from '../styles/BreakPoint';
 
 const Container = styled.main`
-  padding-top: 70px;
+  padding-top: 50px;
+
+  @media ${device.tablet} {
+    padding-top: 70px;
+  }
 `;
 
 const Main: React.FC = ({ children }) => {
