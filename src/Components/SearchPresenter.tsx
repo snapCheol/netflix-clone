@@ -4,13 +4,24 @@ import ListItem from './ListItem';
 import Section from './Section';
 import { AsyncListState } from '../redux/modules/media/reducer';
 import Loader from './Loader';
+import { device } from '../styles/BreakPoint';
 
 const SearchSection = styled.div`
   display: flex;
   flex-wrap: wrap;
+  padding: 0 5%;
   & > div {
-    width: 20%;
+    width: 50%;
     margin-bottom: 20px;
+    @media ${device.mobileM} {
+      width: 33.3333%;
+    }
+    @media ${device.tablet} {
+      width: 25%;
+    }
+    @media ${device.laptop} {
+      width: 20%;
+    }
   }
 `;
 

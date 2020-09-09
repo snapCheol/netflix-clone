@@ -8,6 +8,8 @@ import {
 } from '../redux/modules/types';
 import { IMAGE_PATH_PREFIX } from '../redux/modules/constant';
 import { fadeIn, scaleUp, scaleDown, fadeOut } from '../styles/Animation';
+import { device } from '../styles/BreakPoint';
+import Loader from './Loader';
 
 const Dimm = styled.div<ModalAnimationType>`
   display: flex;
@@ -40,7 +42,7 @@ const ModalContainer = styled.div<ModalAnimationType>`
   display: flex;
   flex-direction: column;
   width: 850px;
-  max-width: 100%;
+  max-width: 90%;
   background-color: #181818;
   border-radius: 5px;
   overflow-y: auto;
@@ -85,28 +87,47 @@ const CloseButton = styled.button`
   font-size: 25px;
   color: #fff;
   background: #000;
+  transform: scale(0.7);
+  @media ${device.tablet} {
+    transform: scale(1);
+  }
 `;
 
 const DetailContent = styled.div`
   padding: 5%;
 
   & h3 {
-    font-size: 30px;
+    font-size: 16px;
+    @media ${device.tablet} {
+      font-size: 20px;
+    }
+    @media ${device.laptop} {
+      font-size: 25px;
+    }
   }
   & p {
-    margin-top: 50px;
-    font-size: 20px;
+    margin-top: 10px;
+    font-size: 14px;
+    @media ${device.tablet} {
+      margin-top: 30px;
+      font-size: 17px;
+    }
+    @media ${device.laptop} {
+      margin-top: 50px;
+    }
   }
 `;
 
 type DetailModalType = {
   isDetailModalOpen: boolean;
+  loading: boolean;
   data: MediaDetail | null;
   closeModal: () => void;
 };
 
 const DetailModal = ({
   isDetailModalOpen,
+  loading,
   data,
   closeModal,
 }: DetailModalType) => {
@@ -121,16 +142,16 @@ const DetailModal = ({
       }, 250);
     }
     setLocalVisible(isDetailModalOpen);
-    console.log('isDetailModalOpen', isDetailModalOpen);
   }, [animate, localVisible, isDetailModalOpen]);
 
   if (!data || (!localVisible && !animate)) return null;
   return (
     <Dimm onClick={closeModal} modalAnimation={!isDetailModalOpen}>
       <ModalContainer modalAnimation={!isDetailModalOpen}>
+        {loading && !data && <Loader />}
         <DetailStillCut
-          bgImage={`${IMAGE_PATH_PREFIX}/original${
-            data?.backdrop_path || data?.poster_path
+          bgImage={`${IMAGE_PATH_PREFIX}/w500/${
+            data.backdrop_path || data.poster_path
           }`}>
           <DetailStillCutBg />
         </DetailStillCut>

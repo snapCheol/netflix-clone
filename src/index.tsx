@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './redux/modules';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import 'antd/dist/antd.css';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

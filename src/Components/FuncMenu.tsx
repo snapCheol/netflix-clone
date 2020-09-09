@@ -12,6 +12,12 @@ const Container = styled.div`
 
   & button {
     color: #fff;
+    background: transparent;
+    border: none;
+
+    &:focus {
+      background: transparent;
+    }
   }
   .FunctionalMenu {
     display: flex;
@@ -37,7 +43,7 @@ const FuncMenu = () => {
             setActiveSearch={setActiveSearch}
           />
         )}
-        <Button onClick={onSearchBox}>
+        <Button htmlType="button" onClick={onSearchBox}>
           <span className="a11yHidden">검색</span>
           <SearchOutlined />
         </Button>
@@ -46,4 +52,4 @@ const FuncMenu = () => {
   );
 };
 
-export default FuncMenu;
+export default React.memo(FuncMenu);

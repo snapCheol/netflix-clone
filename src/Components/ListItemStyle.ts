@@ -25,7 +25,6 @@ export const Container = styled.a`
   &:hover,
   &:focus {
     ${StillCut} {
-      border: 1px inset #fff;
     }
   }
 `;

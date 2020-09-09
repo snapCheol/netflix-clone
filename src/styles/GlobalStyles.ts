@@ -9,7 +9,9 @@ export const GlobalStyle = createGlobalStyle`
     font: 1rem/1.5 "Spoqa Han Sans",sans-serif;
     color: #fff;
   }
-  
+  h1, h2, h3, h4, h5, h6{
+    color: #fff;
+  }
   body, 
   body *, 
   body::after,
@@ -36,7 +38,11 @@ export const GlobalStyle = createGlobalStyle`
       cursor: pointer; 
       padding: 0; 
       border: 0;
+      background: transparent;
+    }
+    .ant-btn:hover, .ant-btn:focus, .ant-btn:active{
       background: none;
+      color: inherit;
     }
     ul {
       list-style: none;

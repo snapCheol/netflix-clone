@@ -15,6 +15,7 @@ import {
   fetchDetailTv,
   openDetailModal,
 } from '../redux/modules/media';
+import { Rate } from 'antd';
 
 type ListItemTypes = {
   mediaType: 'tv' | 'movie';
@@ -63,6 +64,14 @@ const ListItem = ({ data, id, mediaType }: ListItemTypes) => {
           <PreviewContainer hover={hover}>
             <strong>{data.title || data.name}</strong>
             <Overview>
+              <div>
+                <Rate
+                  defaultValue={Number(data.vote_average) / 2}
+                  allowHalf
+                  disabled
+                />
+              </div>
+
               {data.overview ? (
                 data.overview
               ) : (

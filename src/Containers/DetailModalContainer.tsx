@@ -6,13 +6,16 @@ import { closeDetailModal } from '../redux/modules/media';
 
 const DetailContainer = () => {
   const { isDetailModalOpen } = useSelector((state: RootState) => state.media);
-  const { data } = useSelector((state: RootState) => state.media.detailMedia);
+  const { loading, data } = useSelector(
+    (state: RootState) => state.media.detailMedia
+  );
   const dispatch = useDispatch();
   const closeModal = useCallback(() => {
     dispatch(closeDetailModal());
   }, [dispatch]);
   return (
     <DetailModal
+      loading={loading}
       data={data}
       isDetailModalOpen={isDetailModalOpen}
       closeModal={closeModal}
