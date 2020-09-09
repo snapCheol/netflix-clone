@@ -3,7 +3,7 @@ export type bgImagePropsType = {
 };
 
 export type ModalAnimationType = {
-  modalAnimation?: boolean;
+  isDetailModalOpen?: boolean;
 };
 
 export interface MediaListType {

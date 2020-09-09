@@ -12,7 +12,7 @@ import { device } from '../styles/BreakPoint';
 import Loader from './Loader';
 
 const Dimm = styled.div<ModalAnimationType>`
-  display: flex;
+  display: ${(props) => (props.isDetailModalOpen ? 'none' : 'flex')};
   justify-content: center;
   position: fixed;
   top: 0;
@@ -20,6 +20,7 @@ const Dimm = styled.div<ModalAnimationType>`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  /* background-color: transparent; */
   z-index: 9999;
   overflow-y: auto;
   transition: all 1s ease;
@@ -29,7 +30,7 @@ const Dimm = styled.div<ModalAnimationType>`
   animation-name: ${fadeIn};
 
   ${(props) =>
-    props.modalAnimation &&
+    props.isDetailModalOpen &&
     css`
       animation-name: ${fadeOut};
     `}
@@ -51,11 +52,12 @@ const ModalContainer = styled.div<ModalAnimationType>`
   animation-timing-function: ease-in;
   animation-name: ${scaleUp};
   animation-fill-mode: forwards;
+
   ${(props) =>
-    props.modalAnimation &&
+    props.isDetailModalOpen &&
     css`
       animation-name: ${scaleDown};
-    `}
+    `};
 `;
 
 const DetailStillCut = styled.div<bgImagePropsType>`
@@ -144,14 +146,15 @@ const DetailModal = ({
     setLocalVisible(isDetailModalOpen);
   }, [animate, localVisible, isDetailModalOpen]);
 
-  if (!data || (!localVisible && !animate)) return null;
+  if (loading) return <Loader />;
+  if (!localVisible && !animate) return null;
+
   return (
-    <Dimm onClick={closeModal} modalAnimation={!isDetailModalOpen}>
-      <ModalContainer modalAnimation={!isDetailModalOpen}>
-        {loading && !data && <Loader />}
+    <Dimm onClick={closeModal} isDetailModalOpen={!isDetailModalOpen}>
+      <ModalContainer isDetailModalOpen={!isDetailModalOpen}>
         <DetailStillCut
           bgImage={`${IMAGE_PATH_PREFIX}/w500/${
-            data.backdrop_path || data.poster_path
+            data?.backdrop_path || data?.poster_path
           }`}>
           <DetailStillCutBg />
         </DetailStillCut>
