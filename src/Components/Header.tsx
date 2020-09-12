@@ -79,7 +79,7 @@ const Header = () => {
         <Logo />
         {width > breakPoint.tablet && <Navigation />}
         {width < breakPoint.tablet && (
-          <MobileNavigation activeNav={activeNav} />
+          <MobileNavigation activeNav={activeNav} toggleNav={toggleNav} />
         )}
         <FuncMenu />
       </Inner>
