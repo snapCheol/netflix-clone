@@ -11,12 +11,12 @@ type FormProps = {
 
 const Form = styled.form<FormProps>`
   display: flex;
-  width: ${(props) => (props.activeSearch ? 'auto' : 0)};
+  width: ${(props) => (props.activeSearch ? '250px' : 0)};
   padding: 0 10px 0 20px;
   justify-content: center;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.85);
-  margin-right: 25px;
+  margin-right: 3%;
   transition: all 0.3s ease;
 `;
 const Search = styled.input`

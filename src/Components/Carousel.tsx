@@ -14,7 +14,7 @@ const Carousel: React.FC = ({ children }) => {
     dots: false,
     infinite: true,
     speed: 500,
-    arrows: false,
+    arrows: true,
     slidesToShow: 5,
     slidesToScroll: 5,
     responsive: [
@@ -34,7 +34,7 @@ const Carousel: React.FC = ({ children }) => {
         },
       },
       {
-        breakpoint: breakPoint.laptop,
+        breakpoint: breakPoint.laptopL,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,

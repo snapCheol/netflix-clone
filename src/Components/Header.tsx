@@ -63,6 +63,7 @@ const Header = () => {
       if (viewPort === 'mobile') return;
       dispatch(viewPortMobile());
     }
+
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
